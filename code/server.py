@@ -1,6 +1,8 @@
+import sys
 import eventlet
 import socketio
-
+sys.path.append('/')
+import jsonParser
 
 sio = socketio.Server(cors_allowed_origins='*')
 
@@ -8,15 +10,53 @@ app = socketio.WSGIApp(sio, static_files={
     '/': {'content_type': 'text/html', 'filename': 'index.html'}
 })
 
+def switcher(i):
+    switcher = {
+        # 4 types that are usable
+        'Drumming Fingers': 'TableScan',
+        'Zooming In With Two Fingers': 'Join',
+        'Zooming Out With Two Fingers': 'Join',
+        'Pushing Hand Away': 'Project',
+        'Pushing Hand In': 'Project',
+        'Shaking Hand': 'Sort',
+        'Stop Sign': 'Filter',
+        # orientation gestures
+        'Swiping Left': 'next',
+        'Swiping Right': 'next',
+        'Thumb Up': 'confirm',
+        'Thumb Down': 'cancel',
+        'Swiping Down': 'undo',
+        'Turning Hand Clockwise': 'delete',
+        'Turning Hand Counterclockwise': 'delete'
+
+    }
+    return switcher.get(i, None)
+
+
 @sio.event
 def connect(sid, environ):
     print('connect ', sid)
 
 @sio.event
-def my_message(sid, data):
-    print('message:', data)
-    sio.emit('my_message',  data)
-    print('send')
+def my_message(sid, gesture):
+    print('message:', gesture)
+    msg = switcher(gesture)
+    if msg == None:
+        return
+    if (msg[0].isupper()):
+        message = jsonParser.encode(msg)
+        if(message != None):
+            sio.emit('my_message', message)
+    elif (msg.lower() == 'undo'):
+        sio.emit('my_message',jsonParser.undo())
+    elif (msg.lower() == 'delete'):
+        jsonParser.delete()
+        sio.emit('my_message','delete')
+    else:
+        sio.emit('my_message', jsonParser.adjust(msg))
+
+    #sio.emit('my_message',  data)
+    print('send:', msg)
 
 @sio.event
 def disconnect(sid):
