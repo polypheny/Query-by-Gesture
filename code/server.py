@@ -61,6 +61,9 @@ def my_message(sid, gesture):
 @sio.event
 def disconnect(sid):
     print('disconnect ', sid)
+    #very cheap solution to delete after connection was aborted
+    jsonParser.delete()
+
 
 if __name__ == '__main__':
     eventlet.wsgi.server(eventlet.listen(('', 4999)), app)

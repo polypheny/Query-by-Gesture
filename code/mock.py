@@ -33,13 +33,14 @@ def send(msg):
 def loop():
     while True:
         command = input()
-        if (command.lower() == "undo"):
-            send(jsonParser.undo())
-        elif (command.lower() == "delete"):
-            jsonParser.delete()
-            send("delete")
-        else:
-            send(jsonParser.encode(command))
+        send('Drumming Fingers')
+        # if (command.lower() == "undo"):
+        #     send(jsonParser.undo())
+        # elif (command.lower() == "delete"):
+        #     jsonParser.delete()
+        #     send("delete")
+        # else:
+        #     send(jsonParser.encode(command))
 
 
 def startConnenction():

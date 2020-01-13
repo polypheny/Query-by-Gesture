@@ -21,6 +21,8 @@ inNode = False
 inType = False
 operators = ['=', '<>', '<', '>', '<=', '>=']
 
+inTexr = False
+
 
 class Connection():
     def __init__(self, source, target):
@@ -172,8 +174,11 @@ def adjust(command: str):
     global inType
     global lastNode
     global operators
-    if (not inNode):
+    if (not inNode or inText):
         return None
+    if (inText):
+        #TODO
+        return
     if (lastNode.type == 'Join'):
         if (inType):
             if (command == 'next'):
