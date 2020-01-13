@@ -59,6 +59,12 @@ def my_message(sid, gesture):
     print('send:', msg)
 
 @sio.event
+def server_event(sid, delete):
+    print('server_event:', delete)
+    jsonParser.delete()
+    sio.emit('my_message','delete')
+
+@sio.event
 def disconnect(sid):
     print('disconnect ', sid)
     #very cheap solution to delete after connection was aborted
