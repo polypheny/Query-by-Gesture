@@ -7,17 +7,21 @@ sio = socketio.Client()
 
 def switcher(i):
     switcher = {
-        1: 'tablescan',
-        2: 'join',
-        3: 'filter',
-        4: 'project',
-        5: 'aggregate',
-        6: 'sort',
-        7: 'union',
-        8: 'minus',
-        9: 'intersect'
+        # 4 types that are usable
+        'TableScan': 'Drumming Fingers',
+        'Join': 'Zooming In With Two Fingers',
+        'Project': 'Pushing Hand Away',
+        'Sort': 'Shaking Hand',
+        'Filter': 'Stop Sign',
+        # orientation gestures
+        'next': 'Swiping Right',
+        'confirm': 'Thumb Up',
+        'cancel': 'Thumb Down',
+        'undo': 'Swiping Down',
+        'delete': 'Turning Hand Clockwise'
+
     }
-    return switcher.get(i, "Invalid input")
+    return switcher.get(i, None)
 
 
 def printSwitch():
@@ -33,7 +37,7 @@ def send(msg):
 def loop():
     while True:
         command = input()
-        send('Drumming Fingers')
+        send(switcher(command))
         # if (command.lower() == "undo"):
         #     send(jsonParser.undo())
         # elif (command.lower() == "delete"):

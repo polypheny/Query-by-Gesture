@@ -174,11 +174,8 @@ def adjust(command: str):
     global inType
     global lastNode
     global operators
-    if (not inNode or inText):
+    if (not inNode):
         return None
-    if (inText):
-        #TODO
-        return
     if (lastNode.type == 'Join'):
         if (inType):
             if (command == 'next'):
