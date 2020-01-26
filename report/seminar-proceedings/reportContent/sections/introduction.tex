@@ -1,21 +1,11 @@
 \section{Introduction}
 \label{g1:sec:introduction}  % TODO Adopt group prefix
 
-The goal is to input relational query plans via gesture. To realize this, we want to implement a video feed into the Polypheny-DB-UI. The real time video feed should give feedback to the user which gestures are detected and which querries are selected. Firstly, the gestures are hardcoded to the operations (e.g. fist - filter), to afterwards select the fields of an operation. We would like to have droptabels for each field, where also each option is connected to some gesture. To switch between the sidebar and the tree, we need some sort of "enter" gesture as well as an "escape" and switching gesture. At the moment, we were not able to find which gestures are supported by Deepmime, but the project can be realised with at least 10 gestures, even though intuitiveness might suffer.
-\newline
-Secondly, might be difficultly complicated, we thought of a drag and drop style interaction, where the mouse is replaced by the gestures of thumb and index finger. \textit{This is not an activ part of our project} but it should behave like a touchscreen. Precisely, the camera feed and de Polypheny-DB-UI are overlayed so the users sees where the fingers are and the operations can be picked by closing thumb and index finger and dragging it into the working field.
-To selecet the fields of each operation, the same will apply again by open thumb and index finger, acting as mouse. By shortly tapping them together, a click shall be detected.
-This method is much more intuitive and has a better HCI.
-\newline
-That makes this project in a way innovative and futuristic. The invention of the touchscreen has been the foundation of HCI without usning a keyboard or a mouse. The next step would be to not even touch anything anymore, which can be realised by voice and gesture control. Alexa made already a big step into this direction. If a reliable gesture control is developed, it will only take a few steps to feel like Tony Stark, while talking to Jarvis and controlling his computer freehanded and only by gestures.
+The goal is to input relational query plans via gesture. To realize this, we implemented a bridge which parses detected gestures to a JSON String which can be interpreted in the Polypheny UI. For this each gesture is assigned to exactly one query attribute or "escape" commands to navigate in the tree. Due to this hard linked states forfeit the intuitiveness of the interaction.
+\\
+\\
+Further, might be difficultly complicated, we thought of a drag and drop style interaction, where the mouse is replaced by the gestures of thumb and index finger. It should behave like a touchscreen. Precisely, the camera feed and the Polypheny-DB-UI are overlaid so the users sees where the fingers are and the operations can be picked by closing thumb and index finger and dragging it into the working field. Unfortunately we could not realise this, because as expected, it was way to complicated. This method would have been much more intuitive and has a better human-machine interaction (HMI).
+\\
+\\
+The project idea itself is innovative and futuristic. The invention of the touchscreen has been the foundation of HMI without using a keyboard or a mouse. The next step would be to not even touch anything anymore, which can be realised by voice and gesture control. Alexa made already a big step into this direction. If a reliable gesture control is developed, it will only take a few steps to feel like Tony Stark, while talking to Jarvis and controlling his computer free handed and only by gestures. In this report we find out, how many more steps have to be taken to a useful and reliable gesture control.
 
-The following must haves we defined in the proposal:
-\begin{itemize}
-    \item Camera feed integrated in UI
-    \item Camera feed shows detected gesture
-    \item Operation linked to gesture is highlighted after gesture is detected
-    \item Operation selection has to be confirmed/canceled with "enter"/"escape"-gesture
-    \item To re-enter/switch between side bar and selection, switching gestures are supported
-    \item To select fields of an operation, drooptabels are provided where each option is linked to a gesture, which also has to be confirmed
-    
-\end{itemize}
