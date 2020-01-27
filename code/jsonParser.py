@@ -8,6 +8,7 @@ conList = []
 counter = 0
 lastNode = None
 selected = None
+joinIsSet = False
 
 lastDict = {}
 lastOuterList = []
@@ -127,6 +128,7 @@ def encode(name: str):
     global counter
     global lastNode
     global conList
+    global joinIsSet
 
     global lastDict
     global lastOuterList
@@ -177,11 +179,30 @@ def encode(name: str):
         outerList.append(tup)
         dict["nodes"] = outerList
 
-        connection = Connection(node, lastNode)
-        conList.append((connection.id, connection))
-        dict["connections"] = conList
-        counter += 1
-        lastNode = node
+        if (lastNode.type == "Join" and joinIsSet == True):
+            connection = Connection(node, lastNode)
+            conList.append((connection.id, connection))
+            dict["connections"] = conList
+            counter += 1
+            lastNode = node
+            joinIsSet = False
+            print("second Join")
+
+        elif(lastNode.type == "Join"):
+            connection = Connection(node, lastNode)
+            conList.append((connection.id, connection))
+            dict["connections"] = conList
+            counter += 1
+            joinIsSet = True
+            print("first Join")
+
+        else:
+            connection = Connection(node, lastNode)
+            conList.append((connection.id, connection))
+            dict["connections"] = conList
+            counter += 1
+            lastNode = node
+            print("else")
 
         print(dict)
         print(lastDict)
@@ -203,7 +224,7 @@ def adjust(command: str):
 
     if (not inNode):
         return None
-    if (lastNode.type == 'Join'):
+    if (lastNode.type == 'Join' or lastNode.type == 'Filter'):
         if (inType):
             if (command == 'next'):
                 if (lastNode.join == 'INNER'):
