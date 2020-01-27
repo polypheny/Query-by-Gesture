@@ -287,6 +287,7 @@ def undo():
     print(dict)
     print(lastDict)
 
+
     if (undoable):
         dict = copy.deepcopy(lastDict)
         outerList = copy.deepcopy(lastOuterList)
