@@ -21,7 +21,10 @@ inNode = False
 inType = False
 operators = ['=', '<>', '<', '>', '<=', '>=']
 
-inTexr = False
+height = 25
+#left = 0, middle = 1, right = 2
+split = False
+leftmiddleright = 1
 
 
 class Connection():
@@ -33,10 +36,11 @@ class Connection():
 
 class Node():
     def __init__(self, ID, TYPE):
+        pos = getPos(TYPE)
         self.id = ID
         self.type = TYPE
-        self.left = 50
-        self.top = 50
+        self.left = pos[0]
+        self.top = pos[1]
         self.children = []
         self.inputCount = 0
         self.acColumns = {}
@@ -88,6 +92,34 @@ def getHeight(type):
     }
     return switcher.get(type, 260)
 
+def getPos(type):
+    global height
+    global leftmiddleright
+
+    global split
+    top = height
+    if(split):
+        if(leftmiddleright==0):
+            left = 25
+            leftmiddleright = 2
+
+        else:
+            left = 25 + leftmiddleright * 160
+            height = height + getHeight(type) + 25
+            leftmiddleright = 0
+
+    else:
+        height = height + getHeight(type) + 25
+        left = 25 + leftmiddleright * 160
+
+    return [left, top]
+
+def adaptLeft():
+    global split
+    global leftmiddleright
+    split = True
+    leftmiddleright = 0
+
 
 def encode(name: str):
     global dict
@@ -121,14 +153,6 @@ def encode(name: str):
 
     undoable = True
 
-    '''
-    if (verifyName(name) == 'invalid'):
-        print("Input is invalid")
-        return
-    else:
-        name = verifyName(name)
-    '''
-
     if (lastNode == None):
         node = Node("node" + str(counter), name)
         tup = (node.id, node)
@@ -141,6 +165,7 @@ def encode(name: str):
         print(dict)
         print(lastDict)
         if (name == "Join"):
+            adaptLeft()
             inNode = True
             inType = True
         if (name == 'Filter'):
@@ -161,6 +186,7 @@ def encode(name: str):
         print(dict)
         print(lastDict)
         if (name == "Join"):
+            adaptLeft()
             inNode = True
             inType = True
 
@@ -174,6 +200,7 @@ def adjust(command: str):
     global inType
     global lastNode
     global operators
+
     if (not inNode):
         return None
     if (lastNode.type == 'Join'):
@@ -184,24 +211,26 @@ def adjust(command: str):
                 else:
                     lastNode.join = 'INNER'
                 return NodeEncoder().encode(dict)
-            if (command == 'confirm'):
+            elif (command == 'confirm'):
                 inType = False
-            if (command == 'cancel'):
+            elif (command == 'cancel'):
                 reset()
                 inType = False
                 inNode = False
         else:
             if (command == 'next'):
-                print(operators[0])
+                print(operators[1])
                 lastNode.operator = operators[1]
                 last = operators.pop(0)
                 operators.append(last)
+                print(operators)
                 return NodeEncoder().encode(dict)
-            if (command == 'confirm'):
+            elif (command == 'confirm'):
                 inNode = False
-            if (command == 'cancel'):
+            elif (command == 'cancel'):
                 reset()
                 inNode = False
+    return None
 
 def delete():
     global dict

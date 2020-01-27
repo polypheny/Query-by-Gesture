@@ -31,7 +31,8 @@ def printSwitch():
 
 def send(msg):
     print('->', msg)
-    sio.emit('my_message', msg)
+    if(msg != None):
+        sio.emit('my_message', msg)
 
 
 def loop():

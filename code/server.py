@@ -53,7 +53,9 @@ def my_message(sid, gesture):
         jsonParser.delete()
         sio.emit('my_message','delete')
     else:
-        sio.emit('my_message', jsonParser.adjust(msg))
+        message = jsonParser.adjust(msg)
+        if (message != None):
+            sio.emit('my_message', message)
 
     #sio.emit('my_message',  data)
     print('send:', msg)
