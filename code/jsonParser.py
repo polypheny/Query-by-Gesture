@@ -263,6 +263,14 @@ def delete():
     global counter
     global lastNode
 
+    global height
+    global leftmiddleright
+    global split
+
+    height = 25
+    leftmiddleright = 1
+    split = 0
+
     dict = {}
     outerList = []
     conList = []
@@ -287,6 +295,9 @@ def undo():
     print(dict)
     print(lastDict)
 
+
+    if(undoable and lastLastNode == None):
+        delete()
 
     if (undoable):
         dict = copy.deepcopy(lastDict)
