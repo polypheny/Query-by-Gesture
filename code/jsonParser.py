@@ -108,6 +108,9 @@ def getPos(type):
             left = 25 + leftmiddleright * 160
             height = height + getHeight(type) + 25
             leftmiddleright = 0
+            if(type != 'Join'):
+                split = False
+                leftmiddleright = 1
 
     else:
         height = height + getHeight(type) + 25
