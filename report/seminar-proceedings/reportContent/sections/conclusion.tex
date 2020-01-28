@@ -1,21 +1,33 @@
 \section{Conclusion}
 \label{g1:sec:conclusion}
-\subsection{Outcome}
-Across board we are not satisfied with what we handed in. Since we had so much trouble with other things which kept us from improving or even deliver features. The outcome is borderline acceptable and far from good. It is no excuse but the overhead we had to deal in this project took away valuable time which we would have needed. Also connecting the two systems was not as easy as we thought.
-\subsection{Lessons Learned}
-\textbf{Angular}
-\textbf{Ideas}
-\textbf{Planning}
-As discussed all over this report our planning was really off and problems we never faced had us big time. 
-all - not what we wanted - connection between modules painful bc:
-    CORS
-    Sockets
-    API
-    Angular
-lessons learned
-- do not fucking use angular if you dont want to commit suicide - else it's a pretty good framework to lose believe in life and want to question your own existence
-- Plan more in advance 
-- do not lose time with stuff you cant fix
-- do not believe assistants that it's an easy task nor believe that the project idea is thougt through 
+\subsection{Future Work}
+Definitely feedback in any of the three modules has to be implemented. This could be done via text in the Deepmime-UI or even better with highlighting in the query plan. The reason why we did not implement such a simple-looking task was the structure of the Polypheny-UI. Since it was still in development minor changes pushed us back several steps. Also, the behaviour of angular was sometimes really unexpected and we had border artefacts were there should not be any.
+\\
+\\
+A better way to implement feedback to our hard-linked implementation would have been a new popup window in the Polypheny-UI. There should appear a camera feed and a working space with each operator which is worked on. Afterwards, the tree can be set up in the next step and changes can be made in this popup window. Still, there is the same problem as in our implementation - gestures can still cancel out themselves\footnote{\url{https://youtu.be/ESOhRCdkor0}}. 
+\\
+\\
+Also running the whole system is quite laborious. The three components have to be started separately. Polypheny is forgiving, but if something in Deepmime is a bit off, the whole Deepmime-API has to be reloaded, which takes at least a minute. It would be pleasing if after Polypheny is started, the other components can be run via UI input in Polypheny. This would fit the task above where the gesture recognition is implemented into a popup window.
+\\
+\\
+Further, might be difficultly complicated, we thought of a drag and drop style interaction to solve this problem, where the mouse is replaced by the gestures of thumb and index finger. It should behave like a touchscreen. Precisely, the camera feed and the Polypheny-UI are overlaid so the users see where the fingers are and the operations can be picked by closing thumb and index finger and dragging it into the working field. Unfortunately, we could not realise this, because as expected, it was too complicated. This method would have been much more intuitive and has a better human-machine interaction.
+\\
+\\ 
+Speaking of intuitiveness, a voice-controlled query plan seems to be the next easier way to have a mouse- and keyboard-less experience. But since most columns in a database have not "normal" everyday names, probably also an Alexa based system would not bring the joy we expect a user to have with a new HMI.
 
-like this the project has 0 relevance bc everything gets way harder even with voice control - column names are not like a normal person speaks
+\subsection{Lessons Learned}
+Across the board, we are not satisfied with what we handed in. Since we had so much trouble with other things which kept us from improving or even deliver features. It is no excuse, but the overhead we had to deal in this project took away valuable time, which we would have needed. Also connecting the two systems was not as easy as we thought. Additionally, the unforgiving and non-creative manner of the project did not help us develop features for our bridge. It resulted in boredom and frustration. Nevertheless we learned many things in this project:
+\\
+\\
+\textbf{Angular} is a really powerful typescript framework, if and only if you understand it. For our project, we would have needed much more understanding or experience. It was just not possible to learn Angular to the point of understanding which we needed, in comparison to what other tasks we had during the semester. Therefore, we were limited in doing changes in the Polypheny-UI. Nevertheless, the power that Angular provides should not be underestimated.
+\\
+\\
+We had many \textbf{Ideas} for the whole project, some of them mentioned in the future work. Unfortunately, all of these additional ideas could not be implemented since we faced so many side problems. It is important to be aware that not every project is fun and you can bring your creativity into it. Sometimes an idea of something really interesting turns out as a complete logical algorithmic boredom without a real sense of achievement.
+\\
+\\
+\textbf{Planning} is always a big factor in project work. As discussed all over this report our planning was off and problems we had never faced. Apart from Deepmime not working on our computers and the setup problems with Polypheny, at the beginning of implementing the communication between the two modules, the socket implementation was more difficult than expected. After the first establishment of the communication, Cross-Origin Resource Sharing (CORS) problems occurred on one of the machines which we could not fix until the end of the project. Then we firstly could start resolving the actual problem. At that moment we were already really frustrated. We can not fix such an issue with another approach to the project but should bury our heads in the sand.
+\\
+\\
+The \textbf{Relevance} of the examined topic could be huge in future technology development. Seen in one of our papers\footnote{\url{https://www.mdpi.com/1424-8220/19/1/59/htm}} we presented to the other seminar participants. The big feedback of the crowd with ideas, questions and interest in general was astonishing. Unfortunately, the progress in this field is still in its starting hole and our two-man show only scraped on the surface of the iceberg. Therefore \textbf{many steps} have to be taken to achieve a \textbf{reliable gesture control}. May it be in developing a more robust gesture recognition or have a forgiving, navigatable algorithm to control an UI with gestures.
+
+
