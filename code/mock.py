@@ -6,6 +6,11 @@ sio = socketio.Client()
 
 
 def switcher(i):
+    '''
+    Switches the more intuitive commands to the corresponding gestures we defined in the API.
+    :param i: User input as string.
+    :return: Gesture connected to command that server understands command.
+    '''
     switcher = {
         # 4 types that are usable
         'TableScan': 'Drumming Fingers',
@@ -36,6 +41,10 @@ def send(msg):
 
 
 def loop():
+    '''
+    Main loop, which takes user input and sends it to the server.
+    :return:
+    '''
     while True:
         command = input()
         send(switcher(command))
@@ -49,6 +58,10 @@ def loop():
 
 
 def startConnenction():
+    '''
+    Establishes connection to the server and waits for user input.
+    :return:
+    '''
     print("connection to server")
     global sio
     sio.connect('http://localhost:4999')
