@@ -19,7 +19,7 @@ and Deepmime as well)
 When everything is running and connected you can use the following gestures
 to build a query:
 
-####operators####
+*operators*
 - Drumming Fingers: TableScan
 - Zooming In With Two Fingers: Join
 - Zooming Out With Two Fingers: Join
@@ -28,7 +28,7 @@ to build a query:
 - Shaking Hand: Sort
 - Stop Sign: Filter
 
-####navigation####
+*navigation*
 - Swiping Left: next
 - Swiping Right: next
 - Thumb Up: confirm
@@ -52,8 +52,9 @@ In the terminal you can then type in the commands (e.g. TableScan, confirm,
 next etc.).
 
 Example videos:
-– Deepmime: https://youtu.be/2SVj17GXv7s
-– Mock: https://youtu.be/DYrqiwcTzNs
+
+* Deepmime: https://youtu.be/2SVj17GXv7s
+* Mock: https://youtu.be/DYrqiwcTzNs
 
 
 ## Contributing ##
