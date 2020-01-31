@@ -8,9 +8,9 @@ this you have to run the following comands:
 
 `pip3 install python-socketio`
 
-`python3 server.py`
+`python3 server.py [--undo {True, False}]`
 
-If you want to diable the undo function, you can set the undo flag (`--undo True`).
+If you want to diable the undo function, you can set the undo flag.
 
 After that you can run Polypheny and Deepmime. Open the two applications
 in different browser windows or tabs. Deepmime will automatically connect to
