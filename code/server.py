@@ -3,6 +3,8 @@ import eventlet
 import socketio
 sys.path.append('/')
 import jsonParser
+import argparse
+
 
 sio = socketio.Server(cors_allowed_origins='*')
 
@@ -11,7 +13,8 @@ app = socketio.WSGIApp(sio, static_files={
 })
 
 def switcher(i):
-    switcher = {
+    if(args.undo):
+        switcher = {
         # 4 types that are usable
         'Drumming Fingers': 'TableScan',
         'Zooming In With Two Fingers': 'Join',
@@ -29,7 +32,23 @@ def switcher(i):
         'Turning Hand Clockwise': 'delete',
         'Turning Hand Counterclockwise': 'delete'
 
-    }
+        }
+    else:
+        switcher = {
+            # 4 types that are usable
+            'Drumming Fingers': 'TableScan',
+            'Zooming In With Two Fingers': 'Join',
+            'Zooming Out With Two Fingers': 'Join',
+            'Pushing Hand Away': 'Project',
+            'Pushing Hand In': 'Project',
+            'Shaking Hand': 'Sort',
+            'Stop Sign': 'Filter',
+            # orientation gestures
+            'Swiping Left': 'next',
+            'Swiping Right': 'next',
+            'Thumb Up': 'confirm',
+            'Thumb Down': 'cancel',
+        }
     return switcher.get(i, None)
 
 
@@ -74,6 +93,11 @@ def disconnect(sid):
 
 
 if __name__ == '__main__':
-    eventlet.wsgi.server(eventlet.listen(('', 4999)), app)
+    parser = argparse.ArgumentParser(description='Process undo state')
 
-#TODO Jones documentation of whole file
+    parser.add_argument('--undo', type=bool, default=False)
+
+    args = parser.parse_args()
+    print(args.undo)
+    print(switcher('Swiping Down'))
+    eventlet.wsgi.server(eventlet.listen(('', 4999)), app)
