@@ -6,8 +6,11 @@ To run the program, Deepmime, Polypheny and the server (Query by Gesture
 Bridge) must be run individually. It is recommended to start the server first. For
 this you have to run the following comands:
 
-pip3 install python-socketio
-python3 server.py
+`pip3 install python-socketio`
+
+`python3 server.py`
+
+If you want to diable the undo function, you can set the undo flag (`--undo True`).
 
 After that you can run Polypheny and Deepmime. Open the two applications
 in different browser windows or tabs. Deepmime will automatically connect to
