@@ -66,7 +66,6 @@ def startConnenction():
     global sio
     sio.connect('http://localhost:4999')
     send("Mock connected...")
-    printSwitch()
     loop()
 
 
