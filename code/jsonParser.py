@@ -115,8 +115,12 @@ def getHeight(type):
     return switcher.get(type, 260)
 
 
-# TODO Jonas doc
 def getPos(type):
+    '''
+    Returns the coordinates of the node which is inserted.
+    :param type of the node
+    :return [x, y} coordinates
+    '''
     global height
     global leftmiddleright
 
@@ -142,8 +146,10 @@ def getPos(type):
     return [left, top]
 
 
-# TODO Jonas doc
 def adaptLeft():
+    '''
+    repositions x cooridinate after join
+    '''
     global split
     global leftmiddleright
     split = True
@@ -362,6 +368,8 @@ def undo():
     global lastCounter
     global lastLastNode
 
+    global height
+
     print(dict)
     print(lastDict)
 
@@ -372,6 +380,8 @@ def undo():
         delete()
 
     if (undoable):
+        if(lastNode != lastLastNode):
+            height = height - getHeight(lastNode.type) - 25
         dict = copy.deepcopy(lastDict)
         outerList = copy.deepcopy(lastOuterList)
         conList = copy.deepcopy(lastConList)
