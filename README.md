@@ -52,11 +52,7 @@ whole query.
 
 If you only want to insert queries without running it in the end it is enough if
 you run Polypheny-UI with ng serve. Furthermore you can mock Deepmime by
-simply running:
-
-```python
-python3 mock.py
-```
+simply running: `python3 mock.py`
 
 In the terminal you can then type in the commands (e.g. TableScan, confirm,
 next etc.).
