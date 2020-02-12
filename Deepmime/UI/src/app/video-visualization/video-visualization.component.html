@@ -1,0 +1,29 @@
+<video id="videoPlayer" class="videoPlayer"></video>
+<div id="processButtonContainer" *ngIf=!resultActive&&videoSelected&&!recordingMode&&!classifying>
+    <button matTooltip="Segment" [matTooltipShowDelay]=700 mat-fab *ngIf=!currentVisualizationSegmented class="fabButtons" (click)=segmentVideo()>
+            <mat-icon>view_module</mat-icon>   
+    </button>
+    <button matTooltip="Classify" [matTooltipShowDelay]=700 mat-fab class="fabButtons" (click)=classifyVideo()>
+        <mat-icon>reorder</mat-icon>   
+    </button>
+</div>
+<div id="recordControl" *ngIf=recordingMode>
+    <button matTooltip="Start Recording" [matTooltipShowDelay]=700 mat-fab *ngIf=!isRecording&&!recordingReady&&!isStreaming class="fabButtons" (click)=startRecording()>
+        <mat-icon>fiber_manual_record</mat-icon>
+    </button>
+    <button matTooltip="Start Real-Time Classification" [matTooltipShowDelay]=700 mat-fab *ngIf=!isRecording&&!recordingReady&&!isStreaming class="fabButtons" (click)=streamWebcam(16)>
+        <mat-icon>update</mat-icon>
+    </button>
+    <button matTooltip="Stop Real-Time Classification" [matTooltipShowDelay]=700 mat-fab *ngIf=isStreaming class="fabButtons" (click)=stopStreamWebcam()>
+        <mat-icon>clear</mat-icon>
+    </button>
+    <button matTooltip="Stop Recording" [matTooltipShowDelay]=700 mat-fab id="stopButton" disabled=true *ngIf=isRecording&&!recordingReady&&!isStreaming class="fabButtons" (click)=stopRecording()>
+        <mat-icon>stop</mat-icon>
+    </button>
+    <button matTooltip="Upload Recording" [matTooltipShowDelay]=700 mat-fab *ngIf=recordingReady class="fabButtons" (click)=uploadRecording()>
+        <mat-icon>add</mat-icon>
+    </button>
+    <button matTooltip="Discard Recording" [matTooltipShowDelay]=700 mat-fab *ngIf=recordingReady class="fabButtons" (click)=initializeRecorder()>
+        <mat-icon>cancel</mat-icon>
+    </button>
+</div>

@@ -1,0 +1,15 @@
+<div class="navigationBar">
+    <div>
+        <input type="file" id="videoInput" accept="video/*" (change)=inputChange()>
+        <label for="videoInput">
+            <mat-icon matTooltip="Upload" [matTooltipShowDelay]=700 class="whiteIconsAnmiate">add_circle_outline</mat-icon>
+        </label>
+        <mat-icon matTooltip="Start Webcam Mode" [matTooltipShowDelay]=700 class="whiteIconsAnmiate" (click)=startRecordingMode()>videocam</mat-icon>
+    </div>
+    <div>
+        <mat-icon matTooltip="Show labels" [matTooltipShowDelay]=700 class="whiteIconsAnmiate" (click)=activateLabelsView()>label</mat-icon>
+        <mat-icon matTooltip="Help" [matTooltipShowDelay]=700 class="whiteIconsAnmiate" (click)=activateHelp()>help_outline</mat-icon>
+        <mat-icon matTooltip="Reset" [matTooltipShowDelay]=700 class="whiteIconsAnmiate" (click)=reloadApp()>delete</mat-icon>
+    </div>
+</div>
+<div id="videoContainer"></div>
