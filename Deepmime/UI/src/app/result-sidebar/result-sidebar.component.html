@@ -1,0 +1,62 @@
+<div *ngIf=(!resultActive&&!streamResultActive)||classifying id="resultSidebarPlaceholder"></div>
+<div id="resultContainer" *ngIf=resultActive||streamResultActive>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let result of results; let i = index" [expanded]="expandedPanel === i" (opened)="setExpandedPanel(i)" (opened)=setVideoPlayerTime(result.videoName,result.segmentNumber)>
+            <mat-expansion-panel-header>
+                <mat-panel-title *ngIf=streamResultActive>
+                        Stream Result
+                </mat-panel-title>
+                <mat-panel-title *ngIf=!streamResultActive>
+                    Segment {{result.segmentNumber}}
+                </mat-panel-title>
+                <mat-panel-description *ngIf=!streamResultActive>
+                    {{displayTimeSE(getVideo(result.videoName).segments[result.segmentNumber].start, getVideo(result.videoName).segments[result.segmentNumber].end)}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="gestureProbability" *ngFor="let gesture of result.gestures">
+                <div class="gestureProbabilityDescription" *ngIf="(gesture.probability)>resultThreshold">
+                    <label>{{gesture.name}}</label>
+                    <span class="gestureProbabilitySpan">{{gesture.probability.toFixed(2)}}%</span>
+                </div>
+                <mat-progress-bar *ngIf="(gesture.probability)>resultThreshold" mode="determinate" value={{gesture.probability}}></mat-progress-bar>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<div id="expertModeContainer" *ngIf=resultActive||streamResultActive>
+    <div id="feedback" *ngIf=expertMode>
+        <div *ngFor="let result of results; let i = index" (click)=setExpandedPanel(i)>
+            <mat-card class="feedbackCards">
+                Segment {{result.segmentNumber}}
+                <div class="formFieldContainer">
+                    <mat-form-field class="gestureFormFields" appearance="legacy">
+                        <mat-label>Gesture</mat-label>
+                        <input matInput [formControl]="myControl[i]" [matAutocomplete]="auto" (keyup)=changeGesture($event,result.segmentNumber)>
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions[i] | async" [value]="option">
+                                {{option}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Start</mat-label>
+                        <input matInput maxlength=8 value={{displayTime2(getVideo(result.videoName).segments[result.segmentNumber].start)}} (keyup)=changeStartTime($event,result.segmentNumber)>
+                        <mat-hint>HH:MM:SS</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>End</mat-label>
+                        <input matInput maxlength=8 value={{displayTime2(getVideo(result.videoName).segments[result.segmentNumber].end)}} (keyup)=changeEndTime($event,result.segmentNumber)>
+                        <mat-hint>HH:MM:SS</mat-hint>
+                    </mat-form-field>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div id="expertModeButtonsContainer" *ngIf=!streamResultActive>
+        <mat-slide-toggle matTooltip="Enter Expert Mode to give Feedback" [matTooltipShowDelay]=700 id="toggle" [checked]=expertMode (change)="expertMode = !expertMode" *ngIf=resultActive>
+            <mat-icon class="grayIcons">edit</mat-icon>
+        </mat-slide-toggle>
+        <p *ngIf=expertMode&&!feedbackValid>No valid feedback!</p>
+        <mat-icon matTooltip="Send Feedback" [matTooltipShowDelay]=700 class="coloredIconsAnimate coloredIcons" *ngIf=expertMode&&feedbackValid (click)=sendFeedback()>send</mat-icon>
+    </div>
+</div>

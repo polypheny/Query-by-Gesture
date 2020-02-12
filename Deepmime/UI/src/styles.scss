@@ -1,0 +1,400 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+$videoSidebarWidth: 260px;
+$navigationBarHeight: 30px;
+$resultSidebarWidth: 530px;
+$minVideoVisualizationWidth: 300px;
+$sidebarMargin: 15px;
+$minHeight: 300px;
+
+$colorBlue: #3f51b5;
+$colorGray: #f5f5f5;
+$colorGray1: #9b9b9b;
+$colorGray2: #444444;
+
+* {
+	margin: 0px;
+	font-family: 'Roboto', sans-serif;
+}
+
+mat-icon:hover {
+	cursor: pointer;
+}
+
+mat-icon {
+	color: white;
+	padding: 5px;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: white;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: $colorBlue;
+}
+
+.mat-slide-toggle.mat-checked .mat-ripple-element {
+    background-color: rgba($color: #000000, $alpha: 0);
+}
+
+.mat-slide-toggle:not(.mat-checked) .mat-ripple-element {
+    background-color:  rgba($color: #000000, $alpha: 0);
+}
+
+#container {
+	display: flex;
+	justify-content: space-between;
+}
+
+//------------------------------------------------------------------------------------------------
+
+app-video-sidebar {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	min-height: $minHeight;
+	min-width: $videoSidebarWidth;
+	margin-right: $sidebarMargin;
+}
+
+#videoInput {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#videoContainer { 
+	flex-grow: 1;
+	max-height: calc(100vh - #{$navigationBarHeight});
+	min-width: $videoSidebarWidth;
+	max-width: $videoSidebarWidth;
+	background-color: $colorGray;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.navigationBar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: $navigationBarHeight;
+	min-width: $videoSidebarWidth;
+	max-width: $videoSidebarWidth;
+	background-color: $colorBlue;
+}
+
+.videoDiv {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin: 10px;
+	font-size: 11px;
+}
+
+.expandDiv {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.videoDivContent {
+	margin: 5px;
+}
+
+.videoDivContent.videoDivThumbnail {
+	width: calc(#{$videoSidebarWidth} - 70px);
+	padding: 2px;
+	margin: 8px;
+}
+
+.videoDivContent.videoDivThumbnail:hover {
+	cursor: pointer;
+}
+
+.segmentThumbnail {
+	width: calc(#{$videoSidebarWidth} - 85px);
+	padding: 2px;
+	margin: 8px;
+}
+
+.segmentThumbnail:hover{
+	cursor: pointer;
+}
+
+.segmentThumbnailContainer {
+	display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+
+.segmentTime {
+	width: 120px;
+	background-color: rgba($color: #000000, $alpha: 0.8);
+	color: white;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	bottom: 15px;
+	pointer-events: none;
+	position: absolute;
+	z-index: 1;
+}
+
+.segmentContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.videoDivContent.videoLabel {
+	align-self: center;
+}
+
+.videoDivContent.videoDivider {
+	align-self: center;
+	width: calc(#{$videoSidebarWidth} - 50px);
+	border:  0px;
+	border-bottom:  2px solid $colorGray1;
+}
+
+//------------------------------------------------------------------------------------------------
+
+app-video-visualization {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: $minHeight;
+	min-width: $minVideoVisualizationWidth;
+	width: calc(100vw - #{$videoSidebarWidth} - #{$resultSidebarWidth});
+	padding-top: $sidebarMargin;
+	padding-bottom: $sidebarMargin;
+}
+
+#videoPlayer {
+	max-width: 100%;
+	min-width: 200px;
+	max-height: 100%;
+	min-height: 150px;
+	width: 95%;
+}
+
+#recordControl {
+	padding: $sidebarMargin;
+	display: flex;
+}
+
+#processButton {
+	font-size: 50px;
+	width: 50px;
+	height: 50px;
+}
+
+#processButtonContainer {
+	display: flex;
+	justify-content: center;
+	padding: $sidebarMargin;
+}
+
+.fabButtons {
+	display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+	align-items: center;
+	margin: $sidebarMargin !important;
+}
+
+.mat-fab.mat-accent, .mat-flat-button.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
+    background-color: $colorBlue;
+}
+
+//------------------------------------------------------------------------------------------------
+
+app-result-sidebar {
+	max-height: calc(100vh - 2 * #{$sidebarMargin});
+	min-height: $minHeight;
+	min-width: calc(#{$resultSidebarWidth} - 2 * #{$sidebarMargin});
+	margin: $sidebarMargin;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.mat-progress-bar {
+	margin-top: 5px;
+}
+
+.mat-progress-bar-fill::after {
+    background-color: $colorBlue !important;
+}
+
+.mat-progress-bar-buffer {
+	background-color: $colorGray;
+}
+
+.gestureProbability {
+	margin-bottom: $sidebarMargin;
+}
+
+.gestureProbabilityDescription {
+	display: flex;
+	justify-content: space-between;
+}
+
+.gestureProbabilitySpan {
+	color: $colorGray1;
+	font-size: 12px;
+}
+
+.feedbackCards {
+	margin-bottom: $sidebarMargin;
+}
+
+#resultSidebarPlaceholder {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	background-color: $colorGray;
+	height: 100%;
+	width: 100%
+}
+
+#resultContainer {
+	box-sizing: border-box;
+	min-height: calc(50% - 15px);
+	padding: 30px;
+	margin-bottom: $sidebarMargin;
+	background-color: $colorGray;
+}
+
+#expertModeContainer {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 50%;
+	padding: calc(#{$sidebarMargin} * 2);
+	background-color: $colorGray;
+}
+
+#expertModeButtonsContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.grayIcons {
+	color: $colorGray1;
+}
+
+.coloredIcons {
+	color: $colorBlue;
+}
+
+.formFieldContainer {
+	margin-top: $sidebarMargin;
+	margin-bottom: $sidebarMargin;
+}
+
+.mat-form-field-infix {
+	width: 125px !important;
+}
+
+.mat-form-field {
+	margin-right: 5px
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+	color: $colorBlue;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+	background-color: $colorBlue;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+	color: $colorBlue;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+	stroke: $colorBlue;
+}
+
+//------------------------------------------------------------------------------------------------
+
+#helpImageContainer, #loadingScreenContainer, #labelsViewContainer {
+	width: 100vw;
+	min-width: calc(#{$videoSidebarWidth} + #{$minVideoVisualizationWidth} + #{$resultSidebarWidth});
+	height: 100vh;
+	min-height: 500px;
+	position: absolute;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+	box-sizing: border-box;  
+	background-color: rgba($color: #000000, $alpha: 0.8);
+}
+
+#helpImage {
+	max-width: 100%;
+	min-width: 200px;
+	max-height: 100%;
+}
+
+#loadingScreenText {
+	padding-top: 50px;
+	font-size: 20px; 
+	color: white; 
+}
+
+#labelsList {
+	//width: calc(100vw - 1000px);
+	min-width: calc(100% - 1000px);
+	height: 100%;
+	overflow-y: auto;
+	background-color: white;
+}
+
+//------------------------------------------------------------------------------------------------
+
+mat-icon.coloredIconsAnimate.coloredIcons.mat-icon.notranslate.material-icons.mat-icon-no-color.ng-star-inserted:active {
+	-webkit-animation-name: coloredAnimation; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 0.5s; /* Safari 4.0 - 8.0 */
+	animation-name: coloredAnimation;
+	animation-duration: 0.5s;
+}
+  
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes coloredAnimation {
+	from {color: $colorBlue;}
+	to {color: black;}
+}
+
+@keyframes coloredAnimation {
+	from {color: $colorBlue;}
+	to {color: black;}
+}
+
+.mat-icon.whiteIconsAnmiate.mat-icon.notranslate.material-icons.mat-icon-no-color:active {
+	-webkit-animation-name: whiteAnimation; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 0.5s; /* Safari 4.0 - 8.0 */
+	animation-name: whiteAnimation;
+	animation-duration: 0.5s;
+}
+  
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes whiteAnimation {
+	from {color: white;}
+	to {color: $colorGray1;}
+}
+
+@keyframes whiteAnimation {
+	from {color: white;}
+	to {color: $colorGray1;}
+}
