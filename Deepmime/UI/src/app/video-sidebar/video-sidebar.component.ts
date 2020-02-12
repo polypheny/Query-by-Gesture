@@ -83,18 +83,19 @@ export class VideoSidebarComponent implements OnInit {
    * Creates a thumbnail of the video including two buttons where the user can decide if he wants to segment the video or not
    */
   private createSegmentation(visualizationData: VisualizationData) {
-    let videoName = visualizationData.videoName;
+    let videoName: string;
+    videoName = visualizationData.videoName;
     const expandButton = document.getElementById(videoName + 'Expand');
-	expandButton.style.visibility = 'visible';
-	let duration = 0
-	this.videos.forEach((element) => {
+    expandButton.style.visibility = 'visible';
+    let duration = 0;
+    this.videos.forEach((element) => {
       if (element.videoName === videoName) {
         element.segments = [];
-		duration = element.videoDuration;
+        duration = element.videoDuration;
       }
     });
-	ApiAccessService.requestSegmentation(videoName, duration);
-	this.expandVideo(videoName);
+    ApiAccessService.requestSegmentation(videoName, duration);
+    this.expandVideo(videoName);
   }
 
 
@@ -264,6 +265,7 @@ export class VideoSidebarComponent implements OnInit {
     } else {
       document.getElementById(videoParam.videoName + 'VideoElement').style.backgroundColor = 'black';
     }
+    // tslint:disable-next-line:max-line-length
     this.communicationService.visualizeVideo({videoName: videoParam.videoName, input: inputParam, source: videoSource, startTime: time, segmented: false});
     this.communicationService.videoSelected({video: videoParam, segmentNumber: segmentNumberParam});
   }

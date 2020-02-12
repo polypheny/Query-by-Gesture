@@ -190,7 +190,7 @@ export class ApiAccessService {
           const resultObj: Result = JSON.parse(response);
           this.streamResultReadySubject.next(resultObj);
         } catch {
-          alert('Classification failed!');
+          alert('Classification failed! #2');
         }
       }
     };
