@@ -1,7 +1,5 @@
 import socketio
 
-import jsonParser
-
 sio = socketio.Client()
 
 

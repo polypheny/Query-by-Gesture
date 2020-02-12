@@ -3,7 +3,7 @@ import eventlet
 import socketio
 
 sys.path.append('/')
-import jsonParser
+from Bridge import jsonParser
 import argparse
 
 sio = socketio.Server(cors_allowed_origins='*')
