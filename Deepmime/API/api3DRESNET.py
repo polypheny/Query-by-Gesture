@@ -2,10 +2,11 @@ import sys
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
+import cv2, csv
 import sys
 import json, os, glob, io
 
-sys.path.append('Gesture-Recognition-with-3DCNN/')
+sys.path.append('Gesture-Recognition-with-3DRESNET/')
 
 import classify
 
@@ -22,19 +23,21 @@ def hello():
 
 @app.route('/segment', methods=['POST'])
 def segment():
-	""" 
+	"""
 	Receives segmentation request and replies with the result
 	"""
 	videoName = request.form['videoName']
+	videoDuration = request.form['videoDuration']
 	# Segmentation of video here ->
 	videoName = videoName[0:videoName.index('.')]
+	classifier.segment(request.form['videoName'], videoDuration)
 	response = open('segmentFiles/' + videoName + 'Segments.json', 'r')
 	return response.read().replace('\n', '')
 
 @app.route('/classify', methods=['POST'])
 def classifyApi():
-	""" 
-	Receives classification requests and replies with the result 
+	"""
+	Receives classification requests and replies with the result
 	"""
 	videoName = request.form['videoName']
 	videoDuration = request.form['videoDuration']
@@ -124,7 +127,7 @@ def delete():
 
 @app.route('/labels', methods=['GET'])
 def labels():
-	""" 
+	"""
 	Returns the list of existing labels
 	"""
 	response = open('labels.json', 'r')
@@ -179,5 +182,6 @@ def createTrainingsData(videoName, segmentNumber):
 		writer = csv.writer(f)
 		writer.writerow(fields)
 
+
 if __name__ == '__main__':
-	app.run(port=5000)
+	app.run(host='0.0.0.0',port=5000)
