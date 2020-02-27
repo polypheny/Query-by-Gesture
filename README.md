@@ -1,27 +1,26 @@
-# Query by Gesture in PolyphenyDB
+# Query by Gesture
 
-This project was implemented as a bridge between the gesture recognition system ([Deepmime](www.deepmime.org)) and database Management system (polyphenyDB) as a part of Fall2019 project in Human Machine Interaction Seminar.
-
-Authurs: Jannik Jaberg, Jonas Rudin
-         
-The framework implements a connection between deepmime and polypheny by sending the recognized gestures through websocket to polypheny and perform certain tasks based on the received gestures.
-
+This module provides a server which allows to build query plans in Polypheny-UI using gestures. It uses [Deepmime](http://deepmime.org) to recognize the gestures and uses websockets to communicate with Polypheny-UI.
 
 ## How to run it
-To run the program, the polyphenyDB Control should be running. For more details on how to run this component please visit: [Polypheny Control](https://github.com/polypheny/Polypheny-Control)
+To run the program, Polypheny-DB should be running. The easiest way to start Polypheny-DB is to use Polypheny Control. To learn more on Polypheny Control please visit: [Polypheny Control](https://github.com/polypheny/Polypheny-Control)
 
-Afterwards, simply run the bash script by:
+When Polypheny-DB is running, simply run the bash script provided in the root folder of this repository:
 
-`bash run.sh`
+```bash
+bash run.sh
+```
 
-If you want to disable the undo function, you can set the undo flag in the bash scrip as:
+If you want to disable the undo gesture, you can set the undo flag in the bash script:
 
-`python3 server.py [--undo {True, False}]`
-
+```
+python3 server.py [--undo {True, False}]
+```
 
 After running the command above, Deepmime will automatically connect to
-the server when you start a live video. In Polypheny you must be in the Plan
-Builder to connect to the server in the settings. There you are also able to
+the server when you start a live video. In Polypheny UI you must be in the Plan
+Builder view to connect to the server. You can establish the connection by clicking
+the button in the right menu. There you are also able to
 change and save the IP and port (needs to be changed in server
 and Deepmime as well). The deepmime interface will be running on:
 `localhost:4444`
@@ -72,6 +71,10 @@ Example videos:
 We highly welcome your contributions to Polypheny UI. If you would like to contribute, please fork the repository and submit your changes as a pull request. Please consult our [Admin Repository](https://github.com/polypheny/Admin) for guidelines and additional information.
 
 Please note that we have a [code of conduct](https://github.com/polypheny/Admin/blob/master/CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project. 
+
+
+## Acknowledgements
+This first version of this module has been created by Jannik Jaberg and Jonas Rudin.
 
 
 ## License
