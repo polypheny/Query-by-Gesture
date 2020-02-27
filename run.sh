@@ -3,16 +3,18 @@
 cd ./Deepmime/UI
 ng build
 ng serve > /dev/null 2>&1 &
+pid3=$!
+
 cd -
 cd ./Deepmime/API
 python3 api3DRESNET.py &
-pid=$!
+pid2=$!
+
 cd -
 cd ./Bridge
 python3 server.py > /dev/null 2>&1 &
-pid2=$!
+pid=$!
 
-read -p "press"
-killall "ng serve"
-kill -9 $pid
-kill -9 $pid2
+trap "kill -9 `echo $pid3` & kill -9 `echo $pid2` & kill -9 `echo $pid`" EXIT
+
+read -p " "
