@@ -121,6 +121,8 @@ def stream():
     """
     frame = request.files['file']
     frameNumber = request.form['frameNumber']
+    #if not os.path.isdir('streamFiles'):
+    #    os.mkdir('streamFiles')
     if frameNumber == str(0):
         files = glob.glob('streamFiles/*')
         for f in files:

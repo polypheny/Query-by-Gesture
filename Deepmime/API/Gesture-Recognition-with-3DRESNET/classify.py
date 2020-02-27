@@ -1,13 +1,19 @@
 import os, io, json
 import numpy as np
 import cv2
+import keras
 import time
 import tensorflow as tf
-from keras.models import Model, load_model
+from tensorflow.python.keras.backend import set_session
+from tensorflow.python.keras.models import load_model
+from keras.models import Model
+
 
 class Classifier:
 	global model
 	global graph
+	global session
+	session = tf.Session(graph=tf.Graph())
 
 	data = {'videoName' : 'stream', 'segmentNumber' : 0, 'gestures' :[]}
 	frames = []
@@ -21,12 +27,16 @@ class Classifier:
 
 	def load(self):
 		try:
-			self.model = load_model('Gesture-Recognition-with-3DRESNET/model/3D_RESNET_101_drop_0.5/model.best.hdf5')
-			self.graph = tf.get_default_graph()
-			print("Model successfully loaded from disk.")
+
+			#session = tf.Session(graph=tf.Graph().as_default())
+			with session.graph.as_default():
+				keras.backend.set_session(session)
+				self.model  = load_model('Gesture-Recognition-with-3DRESNET/model/3D_RESNET_101_drop_0.5/model.best.hdf5')
+
+				print("Model successfully loaded from disk.")
 
 			#compile again
-			self.model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
+				self.model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
 
 		except:
 			print("Model not found")
@@ -98,7 +108,8 @@ class Classifier:
 		train_set[0][:][:][:][:]=X_train[0,:,:,:,:]
 		train_set = train_set.astype('float32')
 		train_set /=255
-		with self.graph.as_default():
+		with session.graph.as_default():
+			keras.backend.set_session(session)
 			result = self.model.predict(train_set)
 		input=[]
 
