@@ -7,6 +7,7 @@ import tensorflow as tf
 from tensorflow.python.keras.backend import set_session
 from tensorflow.python.keras.models import load_model
 from keras.models import Model
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 class Classifier:
