@@ -1,25 +1,30 @@
-# Query by Gesture Bridge
-Middleware to connect [Deepmime](http://deepmime.org/) (gesture recognition) with 
-Polypheny. It allows building and executing query plans by gestures.
+# Query by Gesture in PolyphenyDB
+
+This project was implemented as a bridge between the gesture recognition system ([Deepmime](www.deepmime.org)) and database Management system (polyphenyDB) as a part of Fall2019 project in Human Machine Interaction Seminar.
+
+Authurs: Jannik Jaberg, Jonas Rudin
+         
+The framework implements a connection between deepmime and polypheny by sending the recognized gestures through websocket to polypheny and perform certain tasks based on the received gestures.
 
 
 ## How to run it
-To run the program, Deepmime, Polypheny and the server (Query by Gesture
-Bridge) must be run individually. It is recommended to start the server first. For
-this you have to run the following comands:
+To run the program, the polyphenyDB Control should be running. For more details on how to run this component please visit: [Polypheny Control](https://github.com/polypheny/Polypheny-Control)
 
-`pip3 install python-socketio`
+Afterwards, simply run the bash script by:
+
+`bash run.sh`
+
+If you want to disable the undo function, you can set the undo flag in the bash scrip as:
 
 `python3 server.py [--undo {True, False}]`
 
-If you want to diable the undo function, you can set the undo flag.
 
-After that you can run Polypheny and Deepmime. Open the two applications
-in different browser windows or tabs. Deepmime will automatically connect to
+After running the command above, Deepmime will automatically connect to
 the server when you start a live video. In Polypheny you must be in the Plan
 Builder to connect to the server in the settings. There you are also able to
 change and save the IP and port (needs to be changed in server
-and Deepmime as well)
+and Deepmime as well). The deepmime interface will be running on:
+`localhost:4444`
 
 When everything is running and connected you can use the following gestures
 to build a query:
