@@ -5,6 +5,7 @@ from flask_cors import CORS, cross_origin
 import cv2, csv
 import sys
 import json, os, glob, io
+import logging
 
 sys.path.append('Gesture-Recognition-with-3DRESNET/')
 
@@ -184,4 +185,11 @@ def createTrainingsData(videoName, segmentNumber):
 
 
 if __name__ == '__main__':
+	print('*************************************************************************')
+	print('**************   Please open your browser: localhost:4444  **************')
+	print('*************************************************************************')
+	log = logging.getLogger('werkzeug')
+	log.disabled = True
 	app.run(host='0.0.0.0',port=5000)
+
+
