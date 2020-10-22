@@ -68,13 +68,13 @@ Example videos:
 
 
 ## Contributing
-We highly welcome your contributions to Polypheny UI. If you would like to contribute, please fork the repository and submit your changes as a pull request. Please consult our [Admin Repository](https://github.com/polypheny/Admin) for guidelines and additional information.
+We highly welcome your contributions. If you would like to contribute, please fork the repository and submit your changes as a pull request. Please consult our [Admin Repository](https://github.com/polypheny/Admin) for guidelines and additional information.
 
 Please note that we have a [code of conduct](https://github.com/polypheny/Admin/blob/master/CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project. 
 
 
 ## Acknowledgements
-This first version of this module has been created by Jannik Jaberg and Jonas Rudin.
+The initial version of this module has been created by Jannik Jaberg and Jonas Rudin.
 
 
 ## License
